@@ -10,8 +10,8 @@ const TitleBarButtons = () => {
   };
   return (
     <div className="ml-auto flex items-center">
-      <TitleBarButton icon="akar-icons:minus" onclick={handleMinimize} />
-      <TitleBarButton icon="eva:close-outline" onclick={handleClose} />
+      <TitleBarButton icon="bx:minus" onClick={handleMinimize} />
+      <TitleBarButton icon="fe:close" onClick={handleClose} />
     </div>
   );
 };
