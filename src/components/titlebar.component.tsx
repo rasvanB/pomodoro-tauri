@@ -4,7 +4,7 @@ const Titlebar = () => {
   return (
     <div
       data-tauri-drag-region
-      className="w-[100vw] h-[30px] bg-[#161625] flex"
+      className="w-[100vw] h-[30px] bg-[#11111D] flex"
     >
       <TitleBarButtons />
     </div>

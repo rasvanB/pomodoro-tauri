@@ -57,10 +57,10 @@
         "fullscreen": false,
         "theme": "Dark",
         "visible": false,
-        "height": 600,
+        "height": 550,
         "resizable": false,
         "decorations": false,
-        "width": 500
+        "width": 400
       }
     ]
   }

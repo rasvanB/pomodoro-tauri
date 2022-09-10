@@ -1,5 +1,6 @@
 import { appWindow } from "@tauri-apps/api/window";
 import { useEffect } from "react";
+import Clock from "./components/clock.component";
 import Titlebar from "./components/titlebar.component";
 
 const App = () => {
@@ -9,9 +10,10 @@ const App = () => {
   }, []);
 
   return (
-    <div className="text-red-500">
+    <>
       <Titlebar />
-    </div>
+      <Clock />
+    </>
   );
 };
 
