@@ -7,8 +7,8 @@ const Clock = () => {
           cy="165px"
           r="135px"
           fill="transparent"
-          stroke="#161626"
-          strokeWidth="30px"
+          stroke="#1f1f36"
+          strokeWidth="20px"
         />
         <circle
           cx="165px"
@@ -18,14 +18,15 @@ const Clock = () => {
           stroke="#7000FF"
           strokeDasharray="785px"
           strokeDashoffset="575px"
-          strokeWidth="30px"
+          strokeWidth="20px"
+          strokeLinecap="round"
         />
         <circle
           cx="165px"
           cy="165px"
-          r="135px"
+          r="125px"
           fill="#0e0e18"
-          style={{ filter: "drop-shadow(0px 0px 6px rgb(0,0,0,0.4))" }}
+          style={{ filter: "drop-shadow(0px 0px 8px rgb(0,0,0,0.4))" }}
         />
       </svg>
       <div className="absolute flex flex-col pb-5 text-center font-montserrat select-none">
