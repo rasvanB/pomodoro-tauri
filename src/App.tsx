@@ -1,6 +1,7 @@
 import { appWindow } from "@tauri-apps/api/window";
 import { useEffect } from "react";
 import Clock from "./components/clock.component";
+import ControlButtons from "./components/control-buttons.component";
 import Titlebar from "./components/titlebar.component";
 
 const App = () => {
@@ -10,10 +11,11 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col items-center">
       <Titlebar />
       <Clock />
-    </>
+      <ControlButtons />
+    </div>
   );
 };
 
