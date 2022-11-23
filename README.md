@@ -1,7 +1,5 @@
-# Tauri + React + Typescript
+![Pomodoro Timer](https://i.ibb.co/BjddT6F/pomodoro-tauri-6h1s-El-U1j-O.png)
+---
+# Pomodoro Timer
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+## Simple and configurable Pomodoro Timer built with: Tauri, React.js, TypeScript
