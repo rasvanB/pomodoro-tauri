@@ -46,7 +46,7 @@ const Clock = () => {
         <div className="font-medium text-[70px] text-white leading-none">
           11:23
         </div>
-        <div className="font-semibold text-[16px] text-[#393939] mt-1">
+        <div className="font-semibold text-[16px] text-[#D2CCCC] mt-1">
           ROUND 0 / 4
         </div>
       </div>
