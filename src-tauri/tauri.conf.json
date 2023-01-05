@@ -57,7 +57,7 @@
         "fullscreen": false,
         "theme": "Dark",
         "visible": false,
-        "height": 550,
+        "height": 535,
         "resizable": false,
         "decorations": false,
         "width": 400
