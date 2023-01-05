@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const settingsSchema = z.object({
+export const settingsSchema = z.object({
   focusTime: z.number().refine((value) => value > 0 && value <= 150, {
     message: "Focus time must at least 1 minute and less than 150",
   }),
@@ -16,6 +16,4 @@ const settingsSchema = z.object({
   endless: z.boolean(),
 });
 
-type Settings = Zod.infer<typeof settingsSchema>;
-
-export default Settings;
+export type Settings = Zod.infer<typeof settingsSchema>;
