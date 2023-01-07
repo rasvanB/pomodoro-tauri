@@ -10,7 +10,60 @@ radius = center - strokeWidth
 ------------------------------
 */
 
+import { useAtom } from "jotai";
+import { useEffect, useMemo } from "react";
+import { settingsAtom, timerAtom } from "../utils/store";
+import {
+  durationToString,
+  formatSeconds,
+  minutesToSeconds,
+} from "../utils/time";
+
 const Clock = () => {
+  const [settings] = useAtom(settingsAtom);
+  const [timer, setTimer] = useAtom(timerAtom);
+
+  const currentDuration = useMemo(() => {
+    return formatSeconds(
+      minutesToSeconds(settings.focusTime) - timer.passedSeconds
+    );
+  }, [timer.passedSeconds, settings.focusTime]);
+
+  console.log(durationToString(currentDuration));
+
+  console.log(currentDuration);
+
+  useEffect(() => {
+    if (timer.isRunning) {
+      console.log(timer);
+
+      const interval = setInterval(() => {
+        if (timer.passedSeconds >= minutesToSeconds(settings.focusTime)) {
+          if (timer.currentRound < settings.rounds) {
+            setTimer((prev) => ({
+              ...prev,
+              isRunning: false,
+              passedSeconds: 0,
+              currentRound: prev.currentRound + 1,
+            }));
+            return;
+          }
+          setTimer((prev) => ({
+            ...prev,
+            isRunning: false,
+            passedSeconds: 0,
+            currentRound: 1,
+          }));
+          return;
+        }
+        setTimer((prev) => ({
+          ...prev,
+          passedSeconds: prev.passedSeconds + 1,
+        }));
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [timer.isRunning, timer.passedSeconds, setTimer]);
   return (
     <div className="flex justify-center items-center px-5 relative mt-5">
       <svg className="w-[330px] h-[330px] -rotate-90 pt-2 mr-5 drop-shadow-[0_0_20px_rgba(129,31,255,0.1)]">
@@ -43,11 +96,13 @@ const Clock = () => {
       </svg>
       <div className="absolute flex flex-col pb-5 text-center font-montserrat select-none">
         <div className="font-medium text-[24px] text-[#D2CCCC]">Focus</div>
-        <div className="font-medium text-[70px] text-white leading-none">
-          11:23
+        <div className="font-medium text-[60px] text-white leading-none">
+          {durationToString(currentDuration)}
         </div>
         <div className="font-semibold text-[16px] text-[#D2CCCC] mt-1">
-          ROUND 0 / 4
+          {settings.endless
+            ? "ENDLESS MODE"
+            : "ROUND " + `${timer.currentRound} / ${settings.rounds}`}
         </div>
       </div>
     </div>
