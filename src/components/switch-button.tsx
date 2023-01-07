@@ -9,7 +9,7 @@ type SwitchButtonProps = {
 function SwitchButton({ isOn, onToggle, label }: SwitchButtonProps) {
   return (
     <div className="flex justify-center items-center mt-2">
-      {label && <span className="mr-3 font-inter">{label}</span>}
+      {label && <span className="mr-4 font-inter">{label}</span>}
       <button
         className={`flex w-[48px] rounded-full focus:outline-none transition-colors ${
           isOn ? "bg-purple-500" : "bg-[#1a1a2c]"

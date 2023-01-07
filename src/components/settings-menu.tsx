@@ -32,10 +32,10 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
     if (inputValue >= min && inputValue <= max) {
       setSettings((prev) => ({ ...prev, [value]: inputValue }));
     }
-    if (inputValue < min) {
+    if (inputValue < min && settings[value] !== min) {
       setSettings((prev) => ({ ...prev, [value]: min }));
     }
-    if (inputValue > max) {
+    if (inputValue > max && settings[value] !== max) {
       setSettings((prev) => ({ ...prev, [value]: max }));
     }
   };
@@ -52,7 +52,8 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
       classNames={settingsMenuTransition}
       appear
     >
-      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-10 flex flex-col items-center gap-3 pt-5">
+      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-10 flex flex-col items-center gap-3 pt-1">
+        <h1 className="text-2xl font-inter font-semibold">SETTINGS</h1>
         <Spinner
           value={settings.focusTime}
           label="Focus Time"
