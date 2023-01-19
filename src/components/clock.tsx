@@ -23,6 +23,10 @@ const Clock = () => {
   const [settings] = useAtom(settingsAtom);
   const [timer, setTimer] = useAtom(timerAtom);
 
+  const size = 100;
+  const strokeWidth = 10;
+  const center = size / 2;
+  const radius = center - strokeWidth;
   const currentDuration = useMemo(() => {
     return formatSeconds(
       minutesToSeconds(settings.focusTime) - timer.passedSeconds
@@ -64,6 +68,7 @@ const Clock = () => {
       return () => clearInterval(interval);
     }
   }, [timer.isRunning, timer.passedSeconds, setTimer]);
+
   return (
     <div className="flex justify-center items-center px-5 relative mt-5">
       <svg className="w-[330px] h-[330px] -rotate-90 pt-2 mr-5 drop-shadow-[0_0_20px_rgba(129,31,255,0.1)]">
