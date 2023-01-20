@@ -13,6 +13,7 @@ type SettingsMenuProps = {
 
 const SettingsMenu = ({ show }: SettingsMenuProps) => {
   const [settings, setSettings] = useAtom(settingsAtom);
+
   const handleIncrement = (max: number, value: NumberKeys<Settings>) => {
     if (settings[value] < max) {
       setSettings((prev) => ({ ...prev, [value]: prev[value] + 1 }));
@@ -54,33 +55,21 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
     >
       <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-10 flex flex-col items-center gap-3 pt-1">
         <h1 className="text-2xl font-inter font-semibold">SETTINGS</h1>
-        <Spinner
-          value={settings.focusTime}
-          label="Focus Time"
-          onDecrement={() => handleDecrement(1, "focusTime")}
-          onIncrement={() => handleIncrement(MAX_TIME, "focusTime")}
-          onChange={(value: number) =>
-            handleChange(1, MAX_TIME, "focusTime", value)
-          }
-        />
-        <Spinner
-          value={settings.shortBreakTime}
-          label="Short Break Time"
-          onDecrement={() => handleDecrement(1, "shortBreakTime")}
-          onIncrement={() => handleIncrement(MAX_TIME, "shortBreakTime")}
-          onChange={(value: number) =>
-            handleChange(1, MAX_TIME, "shortBreakTime", value)
-          }
-        />
-        <Spinner
-          value={settings.longBreakTime}
-          label="Long Break Time"
-          onDecrement={() => handleDecrement(1, "longBreakTime")}
-          onIncrement={() => handleIncrement(MAX_TIME, "longBreakTime")}
-          onChange={(value: number) =>
-            handleChange(1, MAX_TIME, "longBreakTime", value)
-          }
-        />
+        {["focusTime", "shortBreakTime", "longBreakTime"].map((value) => {
+          const name = value.split(/(?=[A-Z])/);
+          name[0] = name[0][0].toUpperCase() + name[0].slice(1);
+          const capitalizedName = name.join(" ");
+          const field = value as NumberKeys<Settings>;
+          return (
+            <Spinner
+              value={settings[field]}
+              label={capitalizedName}
+              onDecrement={() => handleDecrement(1, field)}
+              onIncrement={() => handleIncrement(MAX_TIME, field)}
+              onChange={(val: number) => handleChange(1, MAX_TIME, field, val)}
+            />
+          );
+        })}
         <Spinner
           value={settings.rounds}
           label="Number of Rounds"
