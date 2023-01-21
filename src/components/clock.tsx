@@ -44,20 +44,15 @@ const Clock = () => {
   const [, incrementRound] = useAtom(incrementRoundAtom);
 
   const currentDuration = useMemo(() => {
-    return formatSeconds(
-      minutesToSeconds(settings.focusTime) - timer.passedSeconds
-    );
-  }, [timer.passedSeconds, settings.focusTime]);
+    const timeLimit = timer.isBreak
+      ? settings.shortBreakTime
+      : settings.focusTime;
+    return formatSeconds(minutesToSeconds(timeLimit) - timer.passedSeconds);
+  }, [timer.passedSeconds, settings.focusTime, settings.shortBreakTime]);
 
   const currentProgress = useMemo(() => {
-    return Math.floor(
-      (timer.passedSeconds / minutesToSeconds(settings.focusTime)) * 100
-    );
+    return (timer.passedSeconds / minutesToSeconds(settings.focusTime)) * 100;
   }, [timer.passedSeconds, settings.focusTime]);
-
-  console.log(durationToString(currentDuration));
-  console.log(currentProgress);
-  console.log(currentDuration);
 
   const arcOffset = useMemo(() => {
     return ARC_LENGTH * ((100 - currentProgress) / 100);
@@ -65,11 +60,13 @@ const Clock = () => {
 
   useEffect(() => {
     if (timer.isRunning) {
-      console.log(timer);
-
       const interval = setInterval(() => {
-        if (timer.passedSeconds >= minutesToSeconds(settings.focusTime)) {
-          if (timer.currentRound < settings.rounds) {
+        const timeLimit = timer.isBreak
+          ? settings.shortBreakTime
+          : settings.focusTime;
+        const timeLimitInSeconds = minutesToSeconds(timeLimit);
+        if (timer.passedSeconds >= timeLimitInSeconds) {
+          if (timer.currentRound < settings.rounds || settings.endless) {
             incrementRound();
             return;
           }
@@ -81,8 +78,6 @@ const Clock = () => {
       return () => clearInterval(interval);
     }
   }, [timer.isRunning, timer.passedSeconds, setTimer]);
-
-  console.log(ARC_LENGTH, SIZE, STROKE_WIDTH, CENTER, RADIUS, arcOffset);
 
   return (
     <div className="flex justify-center items-center px-5 relative mt-5">
@@ -119,7 +114,9 @@ const Clock = () => {
         />
       </svg>
       <div className="absolute flex flex-col pb-5 text-center font-montserrat select-none">
-        <div className="font-medium text-[24px] text-[#D2CCCC]">Focus</div>
+        <div className="font-medium text-[24px] text-[#D2CCCC]">
+          {timer.isBreak ? "Break" : "Focus"}
+        </div>
         <div className="font-medium text-[60px] text-white leading-none">
           {durationToString(currentDuration)}
         </div>

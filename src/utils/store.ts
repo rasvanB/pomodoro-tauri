@@ -15,19 +15,21 @@ export const timerAtom = atom({
   passedSeconds: 0,
   currentRound: 1,
   isRunning: false,
+  isBreak: false,
 });
 
 export const incrementTimerAtom = atom(null, (get, set) => {
-  const { passedSeconds, currentRound, isRunning } = get(timerAtom);
+  const prev = get(timerAtom);
   set(timerAtom, {
-    passedSeconds: passedSeconds + 1,
-    currentRound,
-    isRunning,
+    ...prev,
+    passedSeconds: prev.passedSeconds + 1,
   });
 });
 
 export const resetTimerAtom = atom(null, (get, set) => {
+  const prev = get(timerAtom);
   set(timerAtom, {
+    ...prev,
     passedSeconds: 0,
     currentRound: 1,
     isRunning: false,
@@ -37,9 +39,11 @@ export const resetTimerAtom = atom(null, (get, set) => {
 export const incrementRoundAtom = atom(null, (get, set) => {
   const prev = get(timerAtom);
   set(timerAtom, {
-    currentRound: prev.currentRound + 1,
+    ...prev,
+    currentRound: prev.isBreak ? prev.currentRound + 1 : prev.currentRound,
     passedSeconds: 0,
     isRunning: false,
+    isBreak: !prev.isBreak,
   });
 });
 

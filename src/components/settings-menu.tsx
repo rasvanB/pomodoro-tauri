@@ -4,7 +4,7 @@ import { settingsAtom } from "../utils/store";
 import { useAtom } from "jotai";
 
 import Spinner from "./spinner";
-import { MAX_ROUNDS, MAX_TIME, NumberKeys, Settings } from "../types/settings";
+import { MAX_TIME, NumberKeys, Settings } from "../types/settings";
 import SwitchButton from "./switch-button";
 
 type SettingsMenuProps = {
@@ -53,13 +53,14 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
       classNames={settingsMenuTransition}
       appear
     >
-      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-20 flex flex-col items-center gap-3 pt-1 overflow-y-auto overflow-x-hidden pb-10 scrollbar scrollbar-thumb-[#171727] scroll-smooth">
+      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-20 flex flex-col items-center gap-3 pt-1 overflow-y-auto overflow-x-hidden pb-10 scrollbar scrollbar-thumb-[#171727]">
         <h1 className="text-2xl font-inter font-semibold">SETTINGS</h1>
         {[
           "focusTime",
           "shortBreakTime",
           "longBreakTime",
           "longBreakInterval",
+          "rounds",
         ].map((value) => {
           const name = value.split(/(?=[A-Z])/);
           name[0] = name[0][0].toUpperCase() + name[0].slice(1);
@@ -76,15 +77,7 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
             />
           );
         })}
-        <Spinner
-          value={settings.rounds}
-          label="Number of Rounds"
-          onDecrement={() => handleDecrement(1, "rounds")}
-          onIncrement={() => handleIncrement(MAX_ROUNDS, "rounds")}
-          onChange={(value: number) =>
-            handleChange(1, MAX_ROUNDS, "rounds", value)
-          }
-        />
+
         <SwitchButton
           onToggle={handleToggle}
           value={settings.endless}
