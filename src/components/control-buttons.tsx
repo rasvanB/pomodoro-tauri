@@ -1,10 +1,13 @@
 import { Icon } from "@iconify/react";
 import { useAtom } from "jotai";
 import { button } from "../styles/button";
-import { timerAtom } from "../utils/store";
+import { incrementRoundAtom, resetTimerAtom, timerAtom } from "../utils/store";
 
 const ControlButtons = () => {
   const [timer, setTimer] = useAtom(timerAtom);
+  const [, incrementRound] = useAtom(incrementRoundAtom);
+  const [, resetTimer] = useAtom(resetTimerAtom);
+
   const toggleTimer = () =>
     setTimer((prev) => ({
       ...prev,
@@ -13,7 +16,10 @@ const ControlButtons = () => {
 
   return (
     <div className="text-center flex gap-5 text-white items-center justify-center mt-7">
-      <button className={button({ intent: "sideControl" })}>
+      <button
+        className={button({ intent: "sideControl" })}
+        onClick={resetTimer}
+      >
         <Icon icon="codicon:debug-restart" className="text-[25px]" />
       </button>
       <button
@@ -28,7 +34,10 @@ const ControlButtons = () => {
           className="text-[45px]"
         ></Icon>
       </button>
-      <button className={button({ intent: "sideControl" })}>
+      <button
+        className={button({ intent: "sideControl" })}
+        onClick={incrementRound}
+      >
         <Icon icon="bi:stop-fill" className="text-[32px]"></Icon>
       </button>
     </div>
