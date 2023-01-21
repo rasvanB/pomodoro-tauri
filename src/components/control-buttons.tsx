@@ -4,12 +4,12 @@ import { timerAtom } from "../utils/store";
 
 const ControlButtons = () => {
   const [timer, setTimer] = useAtom(timerAtom);
-  const toggleTimer = () => {
+  const toggleTimer = () =>
     setTimer((prev) => ({
       ...prev,
       isRunning: !prev.isRunning,
     }));
-  };
+
   return (
     <div className="text-center flex gap-5 text-white items-center justify-center mt-7">
       <button className="bg-[#181828] w-[55px] h-[55px] rounded-full flex justify-center items-center">

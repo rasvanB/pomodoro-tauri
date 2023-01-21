@@ -53,7 +53,7 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
       classNames={settingsMenuTransition}
       appear
     >
-      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-10 flex flex-col items-center gap-3 pt-1">
+      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-10 flex flex-col items-center gap-3 pt-1 overflow-y-auto overflow-x-hidden pb-10">
         <h1 className="text-2xl font-inter font-semibold">SETTINGS</h1>
         {["focusTime", "shortBreakTime", "longBreakTime"].map((value) => {
           const name = value.split(/(?=[A-Z])/);
@@ -62,6 +62,7 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
           const field = value as NumberKeys<Settings>;
           return (
             <Spinner
+              key={value}
               value={settings[field]}
               label={capitalizedName}
               onDecrement={() => handleDecrement(1, field)}
@@ -81,7 +82,7 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
         />
         <SwitchButton
           onToggle={handleToggle}
-          isOn={settings.endless}
+          value={settings.endless}
           label="Endless Mode"
         />
       </div>
