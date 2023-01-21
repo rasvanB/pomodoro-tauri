@@ -12,7 +12,13 @@ radius = center - strokeWidth
 
 import { useAtom } from "jotai";
 import { useEffect, useMemo } from "react";
-import { settingsAtom, timerAtom } from "../utils/store";
+import {
+  incrementRoundAtom,
+  incrementTimerAtom,
+  resetTimerAtom,
+  settingsAtom,
+  timerAtom,
+} from "../utils/store";
 import {
   durationToString,
   formatSeconds,
@@ -22,6 +28,9 @@ import {
 const Clock = () => {
   const [settings] = useAtom(settingsAtom);
   const [timer, setTimer] = useAtom(timerAtom);
+  const [, incrementTimer] = useAtom(incrementTimerAtom);
+  const [, resetTimer] = useAtom(resetTimerAtom);
+  const [, incrementRound] = useAtom(incrementRoundAtom);
 
   const size = 100;
   const strokeWidth = 10;
@@ -44,26 +53,13 @@ const Clock = () => {
       const interval = setInterval(() => {
         if (timer.passedSeconds >= minutesToSeconds(settings.focusTime)) {
           if (timer.currentRound < settings.rounds) {
-            setTimer((prev) => ({
-              ...prev,
-              isRunning: false,
-              passedSeconds: 0,
-              currentRound: prev.currentRound + 1,
-            }));
+            incrementRound();
             return;
           }
-          setTimer((prev) => ({
-            ...prev,
-            isRunning: false,
-            passedSeconds: 0,
-            currentRound: 1,
-          }));
+          resetTimer();
           return;
         }
-        setTimer((prev) => ({
-          ...prev,
-          passedSeconds: prev.passedSeconds + 1,
-        }));
+        incrementTimer();
       }, 1000);
       return () => clearInterval(interval);
     }
