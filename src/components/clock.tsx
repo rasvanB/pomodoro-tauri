@@ -43,16 +43,22 @@ const Clock = () => {
   const [, resetTimer] = useAtom(resetTimerAtom);
   const [, incrementRound] = useAtom(incrementRoundAtom);
 
+  const timeLimit = timer.isShortBreak
+    ? settings.shortBreakTime
+    : timer.isLongBreak
+    ? settings.longBreakTime
+    : settings.focusTime;
+
+  console.log("timeLimit", timeLimit);
+  console.log(timer);
+
   const currentDuration = useMemo(() => {
-    const timeLimit = timer.isBreak
-      ? settings.shortBreakTime
-      : settings.focusTime;
     return formatSeconds(minutesToSeconds(timeLimit) - timer.passedSeconds);
-  }, [timer.passedSeconds, settings.focusTime, settings.shortBreakTime]);
+  }, [timer.passedSeconds, timeLimit]);
 
   const currentProgress = useMemo(() => {
-    return (timer.passedSeconds / minutesToSeconds(settings.focusTime)) * 100;
-  }, [timer.passedSeconds, settings.focusTime]);
+    return (timer.passedSeconds / minutesToSeconds(timeLimit)) * 100;
+  }, [timeLimit, timer.passedSeconds]);
 
   const arcOffset = useMemo(() => {
     return ARC_LENGTH * ((100 - currentProgress) / 100);
@@ -61,9 +67,6 @@ const Clock = () => {
   useEffect(() => {
     if (timer.isRunning) {
       const interval = setInterval(() => {
-        const timeLimit = timer.isBreak
-          ? settings.shortBreakTime
-          : settings.focusTime;
         const timeLimitInSeconds = minutesToSeconds(timeLimit);
         if (timer.passedSeconds >= timeLimitInSeconds) {
           if (timer.currentRound < settings.rounds || settings.endless) {
@@ -115,7 +118,11 @@ const Clock = () => {
       </svg>
       <div className="absolute flex flex-col pb-5 text-center font-montserrat select-none">
         <div className="font-medium text-[24px] text-[#D2CCCC]">
-          {timer.isBreak ? "Break" : "Focus"}
+          {timer.isShortBreak
+            ? "Short Break"
+            : timer.isLongBreak
+            ? "Long Break"
+            : "Focus"}
         </div>
         <div className="font-medium text-[60px] text-white leading-none">
           {durationToString(currentDuration)}

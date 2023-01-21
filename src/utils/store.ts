@@ -11,12 +11,16 @@ const initialSettings: Settings = {
   endless: false,
 };
 
-export const timerAtom = atom({
+const initialTimer = {
   passedSeconds: 0,
   currentRound: 1,
   isRunning: false,
-  isBreak: false,
-});
+  isShortBreak: false,
+  isLongBreak: false,
+  shortBreaks: 0,
+};
+
+export const timerAtom = atom(initialTimer);
 
 export const incrementTimerAtom = atom(null, (get, set) => {
   const prev = get(timerAtom);
@@ -26,24 +30,34 @@ export const incrementTimerAtom = atom(null, (get, set) => {
   });
 });
 
-export const resetTimerAtom = atom(null, (get, set) => {
-  const prev = get(timerAtom);
-  set(timerAtom, {
-    ...prev,
-    passedSeconds: 0,
-    currentRound: 1,
-    isRunning: false,
-  });
-});
+export const resetTimerAtom = atom(null, (get, set) =>
+  set(timerAtom, initialTimer)
+);
 
 export const incrementRoundAtom = atom(null, (get, set) => {
   const prev = get(timerAtom);
+  let [isShortBreak, isLongBreak] = [false, false];
+  let { shortBreaks, currentRound } = prev;
+
+  if (!prev.isLongBreak && !prev.isShortBreak) {
+    if (shortBreaks === get(settingsAtom).longBreakInterval) {
+      isLongBreak = true;
+      shortBreaks = 0;
+    } else {
+      isShortBreak = true;
+      shortBreaks++;
+    }
+  } else {
+    currentRound++;
+  }
+
   set(timerAtom, {
-    ...prev,
-    currentRound: prev.isBreak ? prev.currentRound + 1 : prev.currentRound,
     passedSeconds: 0,
     isRunning: false,
-    isBreak: !prev.isBreak,
+    currentRound,
+    isShortBreak,
+    isLongBreak,
+    shortBreaks,
   });
 });
 
