@@ -12,19 +12,22 @@ const ControlButtons = () => {
 
   return (
     <div className="text-center flex gap-5 text-white items-center justify-center mt-7">
-      <button className="bg-[#181828] w-[55px] h-[55px] rounded-full flex justify-center items-center">
+      <button className="bg-[#181828] w-[55px] h-[55px] rounded-full flex justify-center items-center hover:bg-[#1e1e31] z-10">
         <Icon icon="codicon:debug-restart" className="text-[25px]" />
       </button>
       <button
-        className="bg-[#7509FF] w-[60px] h-[60px] flex justify-center items-center rounded-md drop-shadow-[0_0_10px_rgba(129,31,255,0.4)]"
+        className="z-0 bg-[#7509FF] hover:bg-[#7d28ec] w-[60px] h-[60px] flex justify-center items-center rounded-md drop-shadow-[0_0_10px_rgba(129,31,255,0.4)] hover:drop-shadow-[0_0_20px_rgba(129,31,255,0.4)]"
         onClick={toggleTimer}
+        style={{
+          transition: "all 0.3s ease-in-out",
+        }}
       >
         <Icon
           icon={`${timer.isRunning ? "heroicons:pause-20-solid" : "ion:play"}`}
           className="text-[45px]"
         ></Icon>
       </button>
-      <button className="bg-[#181828] w-[55px] h-[55px] rounded-full flex justify-center items-center">
+      <button className="bg-[#181828] w-[55px] h-[55px] rounded-full flex justify-center items-center hover:bg-[#1e1e31] z-10">
         <Icon icon="bi:stop-fill" className="text-[32px]"></Icon>
       </button>
     </div>
