@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useAtom } from "jotai";
+import { button } from "../styles/button";
 import { timerAtom } from "../utils/store";
 
 const ControlButtons = () => {
@@ -12,7 +13,7 @@ const ControlButtons = () => {
 
   return (
     <div className="text-center flex gap-5 text-white items-center justify-center mt-7">
-      <button className="bg-[#181828] w-[55px] h-[55px] rounded-full flex justify-center items-center hover:bg-[#1e1e31] z-10">
+      <button className={button({ intent: "sideControl" })}>
         <Icon icon="codicon:debug-restart" className="text-[25px]" />
       </button>
       <button
@@ -27,7 +28,7 @@ const ControlButtons = () => {
           className="text-[45px]"
         ></Icon>
       </button>
-      <button className="bg-[#181828] w-[55px] h-[55px] rounded-full flex justify-center items-center hover:bg-[#1e1e31] z-10">
+      <button className={button({ intent: "sideControl" })}>
         <Icon icon="bi:stop-fill" className="text-[32px]"></Icon>
       </button>
     </div>
