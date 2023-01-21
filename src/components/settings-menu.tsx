@@ -55,7 +55,12 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
     >
       <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-10 flex flex-col items-center gap-3 pt-1 overflow-y-auto overflow-x-hidden pb-10">
         <h1 className="text-2xl font-inter font-semibold">SETTINGS</h1>
-        {["focusTime", "shortBreakTime", "longBreakTime"].map((value) => {
+        {[
+          "focusTime",
+          "shortBreakTime",
+          "longBreakTime",
+          "longBreakInterval",
+        ].map((value) => {
           const name = value.split(/(?=[A-Z])/);
           name[0] = name[0][0].toUpperCase() + name[0].slice(1);
           const capitalizedName = name.join(" ");

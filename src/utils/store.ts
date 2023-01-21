@@ -7,6 +7,7 @@ const initialSettings: Settings = {
   shortBreakTime: 5,
   longBreakTime: 15,
   rounds: 4,
+  longBreakInterval: 2,
   endless: false,
 };
 

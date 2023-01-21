@@ -12,6 +12,11 @@ export const settingsSchema = z.object({
   longBreakTime: z.number().refine((value) => value > 0 && value <= MAX_TIME, {
     message: `Long break time must at least 1 minute and less than ${MAX_TIME}`,
   }),
+  longBreakInterval: z
+    .number()
+    .refine((value) => value > 0 && value <= MAX_ROUNDS, {
+      message: `Long break interval must at least 1 and less than ${MAX_ROUNDS}`,
+    }),
   rounds: z.number().refine((value) => value > 0 && value <= MAX_ROUNDS, {
     message: `Rounds must at least 1 and less than ${MAX_ROUNDS}`,
   }),
