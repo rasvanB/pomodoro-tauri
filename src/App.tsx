@@ -17,9 +17,9 @@ const App = () => {
   return (
     <div
       className={cx(
-        "flex flex-col items-center h-[100vh]",
         isBreak ? "bg-[#0e1811]" : "bg-[#0e0e18]",
-        isBreak ? "dark" : ""
+        isBreak ? "dark" : "",
+        "flex flex-col items-center h-[100vh]"
       )}
     >
       <Titlebar />
