@@ -7,7 +7,7 @@ import TitleBarButton from "./titlebar-button";
 import TitleBarButtons from "./titlebar-buttons";
 
 const Titlebar = () => {
-  const [showSettings, setShowSettings] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
   const [isBreak] = useAtom(breakAtom);
   const toggleSettings = () => setShowSettings((prev) => !prev);
 
@@ -17,7 +17,7 @@ const Titlebar = () => {
         data-tauri-drag-region
         className={cx(
           "w-[100vw] h-[30px] bg-[#11111D] flex z-[999] relative",
-          isBreak ? "bg-[#0e1811]" : "bg-[#11111D]"
+          isBreak ? "bg-[#0f1a12]" : "bg-[#11111D]"
         )}
       >
         <TitleBarButton icon="clarity:menu-line" onClick={toggleSettings} />

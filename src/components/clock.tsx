@@ -111,7 +111,7 @@ const Clock = () => {
           strokeDashoffset={arcOffset + "px"}
           strokeWidth={STROKE_WIDTH + "px"}
           strokeLinecap="round"
-          style={{ transition: "stroke-dashoffset 1s ease" }}
+          style={{ transition: "stroke-dashoffset 0.5s ease" }}
         />
         <circle
           cx={CENTER + "px"}

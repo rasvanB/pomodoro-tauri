@@ -52,7 +52,7 @@ export const incrementRoundAtom = atom(null, (get, set) => {
       shortBreaks++;
     }
   } else {
-    if (currentRound === get(settingsAtom).rounds) {
+    if (currentRound >= get(settingsAtom).rounds) {
       set(timerAtom, initialTimer);
       return;
     }

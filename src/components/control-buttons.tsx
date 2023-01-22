@@ -33,7 +33,7 @@ const ControlButtons = () => {
         className={cx(
           "z-0 w-[60px] h-[60px] flex justify-center items-center rounded-md ",
           isBreak
-            ? "bg-[#23c42d] hover:bg-[#27d632] drop-shadow-[0_0_10px_rgba(31,255,56,0.3)] hover:drop-shadow-[0_0_20px_rgba(31,255,56,0.3)]"
+            ? "bg-[#22bb2c] hover:bg-[#25cf30] drop-shadow-[0_0_10px_rgba(31,255,56,0.3)] hover:drop-shadow-[0_0_20px_rgba(31,255,56,0.3)]"
             : "bg-[#7509FF] hover:bg-[#7d28ec] drop-shadow-[0_0_10px_rgba(129,31,255,0.4)] hover:drop-shadow-[0_0_20px_rgba(129,31,255,0.4)]"
         )}
         onClick={toggleTimer}

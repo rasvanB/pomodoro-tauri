@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div
       className={cx(
-        "flex flex-col items-center h-[100vh] transition-all duration-300 ease-in-out",
+        "flex flex-col items-center h-[100vh]",
         isBreak ? "bg-[#0e1811]" : "bg-[#0e0e18]"
       )}
     >
