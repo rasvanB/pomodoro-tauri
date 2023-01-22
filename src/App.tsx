@@ -12,6 +12,9 @@ const App = () => {
   // make window visible on component mount - prevents white flash
   useEffect(() => {
     appWindow.show();
+    window.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
   }, []);
 
   return (
