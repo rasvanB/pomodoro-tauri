@@ -10,6 +10,7 @@ const Titlebar = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [isBreak] = useAtom(breakAtom);
   const toggleSettings = () => setShowSettings((prev) => !prev);
+  console.log(showSettings);
 
   return (
     <div className="overflow-hidden">

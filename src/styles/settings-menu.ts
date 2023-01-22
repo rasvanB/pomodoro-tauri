@@ -4,5 +4,5 @@ export const settingsMenuTransition = {
   enterDone: "transform translate-y-0",
   exit: "transition ease-out duration-200",
   exitActive: "transform -translate-y-full",
-  exitDone: "transform -translate-y-full",
+  exitDone: "transform -translate-y-full display-none",
 };
