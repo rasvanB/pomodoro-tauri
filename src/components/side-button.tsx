@@ -1,8 +1,6 @@
 import { Icon } from "@iconify/react";
 import { cx } from "class-variance-authority";
 import { button } from "../styles/button";
-import { breakAtom } from "../utils/store";
-import { useAtom } from "jotai";
 
 type SideButtonType = "reset" | "stop";
 type SideButtonProps = {
@@ -20,14 +18,11 @@ const getIcon = (type: SideButtonType): string => {
 };
 
 const SideButton = ({ type, onClick }: SideButtonProps) => {
-  const [isBreak] = useAtom(breakAtom);
   return (
     <button
       className={cx(
         button({ intent: "sideControl" }),
-        isBreak
-          ? "bg-[#152516] hover:bg-[#1a2e1b]"
-          : "bg-[#181828] hover:bg-[#1e1e31]"
+        "dark:bg-[#152516] dark:hover:bg-[#1a2e1b] bg-[#181828] hover:bg-[#1e1e31]"
       )}
       onClick={onClick}
     >

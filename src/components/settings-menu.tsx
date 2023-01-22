@@ -52,7 +52,7 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
       }}
       classNames={settingsMenuTransition}
     >
-      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-20 flex flex-col items-center gap-3 pt-1 overflow-y-auto overflow-x-hidden pb-10 scrollbar scrollbar-thumb-[#171727] -translate-y-full">
+      <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-20 flex flex-col items-center gap-3 pt-1 overflow-y-auto overflow-x-hidden pb-10 scrollbar scrollbar-thumb-[#171727] -translate-y-full dark:bg-[#0f1a12] dark:scrollbar-thumb-[#17291c]">
         <h1 className="text-2xl font-inter font-semibold">SETTINGS</h1>
         {[
           "focusTime",

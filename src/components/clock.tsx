@@ -87,9 +87,8 @@ const Clock = () => {
       <svg
         className={cx(
           `-rotate-90 pt-2 mr-5 drop-shadow-[0_0_20px_rgba(129,31,255,0.1)]`,
-          isBreak
-            ? "drop-shadow-[0_0_20px_rgba(31,255,38,0.1)]"
-            : "drop-shadow-[0_0_20px_rgba(129,31,255,0.1)]"
+          "dark:drop-shadow-[0_0_20px_rgba(31,255,38,0.1)]",
+          "drop-shadow-[0_0_20px_rgba(129,31,255,0.1)]"
         )}
         style={{ width: SIZE + "px", height: SIZE + "px" }}
       >

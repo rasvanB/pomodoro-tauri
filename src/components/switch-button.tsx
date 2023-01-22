@@ -12,7 +12,9 @@ function SwitchButton({ value, onToggle, label }: SwitchButtonProps) {
       {label && <span className="mr-4 font-inter">{label}</span>}
       <button
         className={`flex w-[48.5px] rounded-full focus:outline-none transition-colors ${
-          value ? "bg-purple-500" : "bg-[#1a1a2c]"
+          value
+            ? "bg-purple-500 dark:bg-green-600"
+            : "bg-[#1a1a2c] dark:bg-[#1b2c1a]"
         }`}
         onClick={onToggle}
       >

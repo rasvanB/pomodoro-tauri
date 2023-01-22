@@ -36,7 +36,7 @@ const Spinner = ({
         </button>
         <input
           type="text"
-          className="h-[40px] w-[100px] bg-[#1a1a2c] outline outline-0 outline-zinc-800 text-center focus:outline-1 font-semibold"
+          className="h-[40px] w-[100px] bg-[#1a1a2c] dark:bg-[#152214] outline outline-0 outline-zinc-800 text-center focus:outline-1 font-semibold"
           value={value}
           onChange={handleChange}
         />
