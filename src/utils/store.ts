@@ -34,6 +34,10 @@ export const resetTimerAtom = atom(null, (get, set) =>
   set(timerAtom, initialTimer)
 );
 
+export const breakAtom = atom((get) => {
+  const { isShortBreak, isLongBreak } = get(timerAtom);
+  return isShortBreak || isLongBreak;
+});
 export const incrementRoundAtom = atom(null, (get, set) => {
   const prev = get(timerAtom);
   let [isShortBreak, isLongBreak] = [false, false];
@@ -48,6 +52,10 @@ export const incrementRoundAtom = atom(null, (get, set) => {
       shortBreaks++;
     }
   } else {
+    if (currentRound === get(settingsAtom).rounds) {
+      set(timerAtom, initialTimer);
+      return;
+    }
     currentRound++;
   }
 

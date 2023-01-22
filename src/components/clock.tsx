@@ -15,9 +15,11 @@ arcOffset = arcLength * ((100 - progress) / 100)
 ------------------------------
 */
 
+import { cx } from "class-variance-authority";
 import { useAtom } from "jotai";
 import { useEffect, useMemo } from "react";
 import {
+  breakAtom,
   incrementRoundAtom,
   incrementTimerAtom,
   resetTimerAtom,
@@ -39,6 +41,7 @@ const ARC_LENGTH = Math.floor(2 * Math.PI * RADIUS);
 const Clock = () => {
   const [settings] = useAtom(settingsAtom);
   const [timer, setTimer] = useAtom(timerAtom);
+  const [isBreak] = useAtom(breakAtom);
   const [, incrementTimer] = useAtom(incrementTimerAtom);
   const [, resetTimer] = useAtom(resetTimerAtom);
   const [, incrementRound] = useAtom(incrementRoundAtom);
@@ -48,9 +51,6 @@ const Clock = () => {
     : timer.isLongBreak
     ? settings.longBreakTime
     : settings.focusTime;
-
-  console.log("timeLimit", timeLimit);
-  console.log(timer);
 
   const currentDuration = useMemo(() => {
     return formatSeconds(minutesToSeconds(timeLimit) - timer.passedSeconds);
@@ -85,7 +85,12 @@ const Clock = () => {
   return (
     <div className="flex justify-center items-center px-5 relative mt-5">
       <svg
-        className={`-rotate-90 pt-2 mr-5 drop-shadow-[0_0_20px_rgba(129,31,255,0.1)] `}
+        className={cx(
+          `-rotate-90 pt-2 mr-5 drop-shadow-[0_0_20px_rgba(129,31,255,0.1)]`,
+          isBreak
+            ? "drop-shadow-[0_0_20px_rgba(31,255,38,0.1)]"
+            : "drop-shadow-[0_0_20px_rgba(129,31,255,0.1)]"
+        )}
         style={{ width: SIZE + "px", height: SIZE + "px" }}
       >
         <circle
@@ -93,7 +98,7 @@ const Clock = () => {
           cy={CENTER + "px"}
           r={RADIUS + "px"}
           fill="transparent"
-          stroke="#1f1f36"
+          stroke={isBreak ? "#1f3622" : "#1f1f36"}
           strokeWidth={STROKE_WIDTH + "px"}
         />
         <circle
@@ -101,7 +106,7 @@ const Clock = () => {
           cy={CENTER + "px"}
           r={RADIUS + "px"}
           fill="transparent"
-          stroke="#7000FF"
+          stroke={isBreak ? "#1ede04" : "#7000FF"}
           strokeDasharray={ARC_LENGTH + "px"}
           strokeDashoffset={arcOffset + "px"}
           strokeWidth={STROKE_WIDTH + "px"}
@@ -112,11 +117,11 @@ const Clock = () => {
           cx={CENTER + "px"}
           cy={CENTER + "px"}
           r={RADIUS - 10 + "px"}
-          fill="#0e0e18"
+          fill={isBreak ? "#0e180e" : "#0e0e18"}
           style={{ filter: "drop-shadow(0px 0px 8px rgb(0,0,0,0.4))" }}
         />
       </svg>
-      <div className="absolute flex flex-col pb-5 text-center font-montserrat select-none">
+      <div className="absolute flex flex-col text-center font-montserrat">
         <div className="font-medium text-[24px] text-[#D2CCCC]">
           {timer.isShortBreak
             ? "Short Break"
