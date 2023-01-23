@@ -1,20 +1,3 @@
-/*
-CALCULATIONS 
-------------------------------
-size = 100
-strokeWidth = 10
-center = size / 2
-       = 100 / 2 = 50
-radius = center - strokeWidth 
-       = 50 - 10 = 40
-progress = 0
-arcLength = 2 * π * radius 
-          = 2 * 3.14 * 40 = 251.2
-arcOffset = arcLength * ((100 - progress) / 100) 
-          = 251.2 * ((100 - 0) / 100) = 251.2
-------------------------------
-*/
-
 import { cx } from "class-variance-authority";
 import { useAtom } from "jotai";
 import { useEffect, useMemo } from "react";
