@@ -21,7 +21,7 @@ function SwitchButton({ value, onToggle, label }: SwitchButtonProps) {
         <div
           className={`${
             value ? "translate-x-full" : "translate-x-0"
-          } inline-block h-6 w-6 rounded-full bg-white shadow transform`}
+          } inline-block h-6 w-6 rounded-full bg-white shadow transform transition-transform duration-200 ease-in-out`}
         />
       </button>
     </div>
