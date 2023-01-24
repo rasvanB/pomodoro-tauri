@@ -3,18 +3,15 @@ import { cx } from "class-variance-authority";
 import { button } from "../styles/button";
 
 type SideButtonType = "reset" | "stop";
+
 type SideButtonProps = {
   type: SideButtonType;
   onClick: () => void;
 };
 
-const getIcon = (type: SideButtonType): string => {
-  switch (type) {
-    case "reset":
-      return "codicon:debug-restart";
-    case "stop":
-      return "ph:stop-fill";
-  }
+const iconMap: { [key in SideButtonType]: string } = {
+  reset: "codicon:debug-restart",
+  stop: "ph:stop-fill",
 };
 
 const SideButton = ({ type, onClick }: SideButtonProps) => {
@@ -26,7 +23,7 @@ const SideButton = ({ type, onClick }: SideButtonProps) => {
       )}
       onClick={onClick}
     >
-      <Icon icon={getIcon(type)} className="text-[25px]"></Icon>
+      <Icon icon={iconMap[type]} className="text-[25px]"></Icon>
     </button>
   );
 };
