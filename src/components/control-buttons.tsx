@@ -1,6 +1,5 @@
 import { Icon } from "@iconify/react";
 import { useAtom } from "jotai";
-import { debounce } from "debounce";
 import { incrementRoundAtom, resetTimerAtom, timerAtom } from "../utils/store";
 import SideButton from "./side-button";
 
@@ -8,10 +7,6 @@ const ControlButtons = () => {
   const [timer, setTimer] = useAtom(timerAtom);
   const [, incrementRound] = useAtom(incrementRoundAtom);
   const [, resetTimer] = useAtom(resetTimerAtom);
-
-  const showTooltip = debounce(() => {
-    console.log("mouse enter");
-  }, 1000);
 
   const toggleTimer = () =>
     setTimer((prev) => ({
