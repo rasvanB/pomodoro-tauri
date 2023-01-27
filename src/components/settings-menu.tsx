@@ -43,6 +43,11 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
   const handleToggle = () => {
     setSettings((prev) => ({ ...prev, endless: !prev.endless }));
   };
+
+  const settingsKeys = Object.keys(settings).filter((k) => {
+    return typeof settings[k as NumberKeys<Settings>] === "number";
+  });
+
   return (
     <CSSTransition
       in={show}
@@ -54,16 +59,11 @@ const SettingsMenu = ({ show }: SettingsMenuProps) => {
     >
       <div className="absolute bg-[#11111D] text-white select-none h-[505px] w-full z-20 flex flex-col items-center gap-3 pt-1 overflow-y-auto overflow-x-hidden pb-10 scrollbar scrollbar-thumb-[#171727] -translate-y-full dark:bg-[#0f1a12] dark:scrollbar-thumb-[#17291c]">
         <h1 className="text-2xl font-inter font-semibold">SETTINGS</h1>
-        {[
-          "focusTime",
-          "shortBreakTime",
-          "longBreakTime",
-          "longBreakInterval",
-          "rounds",
-        ].map((value) => {
-          const name = value.split(/(?=[A-Z])/);
-          name[0] = name[0][0].toUpperCase() + name[0].slice(1);
-          const capitalizedName = name.join(" ");
+        {settingsKeys.map((value) => {
+          const capitalizedName = value
+            .split(/(?=[A-Z])/)
+            .map((word) => word[0].toUpperCase() + word.slice(1))
+            .join(" ");
           const field = value as NumberKeys<Settings>;
           return (
             <Spinner
