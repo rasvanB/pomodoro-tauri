@@ -1,5 +1,3 @@
-import { CSSTransition } from "react-transition-group";
-
 type SwitchButtonProps = {
   value: boolean;
   onToggle: () => void;
