@@ -7,12 +7,12 @@ type ButtonProps = {
 
 const TitleBarButton = ({ icon, onClick }: ButtonProps) => {
   return (
-    <div
+    <button
       onClick={onClick}
-      className="h-full flex bg-white bg-opacity-0 hover:bg-opacity-5 justify-center px-2 items-center"
+      className="h-full flex bg-white bg-opacity-0 hover:bg-opacity-5 justify-center px-2 items-center focus:outline-none focus:bg-opacity-10"
     >
       <Icon icon={icon} className="text-xl text-white" />
-    </div>
+    </button>
   );
 };
 
