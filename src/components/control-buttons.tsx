@@ -22,7 +22,7 @@ const ControlButtons = () => {
         onClick={toggleTimer}
       >
         <Icon
-          icon={`${timer.isRunning ? "heroicons:pause-20-solid" : "ion:play"}`}
+          icon={timer.isRunning ? "heroicons:pause-20-solid" : "ion:play"}
           className="text-[45px]"
         ></Icon>
       </button>
