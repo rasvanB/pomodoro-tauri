@@ -1,3 +1,4 @@
+import { requestPermission } from "@tauri-apps/api/notification";
 import { appWindow } from "@tauri-apps/api/window";
 import { cx } from "class-variance-authority";
 import { useAtom } from "jotai";
@@ -5,6 +6,7 @@ import { useEffect } from "react";
 import Clock from "./components/clock";
 import ControlButtons from "./components/control-buttons";
 import Titlebar from "./components/titlebar";
+import { permissionGranted, setPermission } from "./utils/notifications";
 import { breakAtom } from "./utils/store";
 
 const App = () => {
@@ -15,6 +17,11 @@ const App = () => {
     window.addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
+    if (!permissionGranted) {
+      requestPermission().then((granted) => {
+        setPermission(granted === "granted");
+      });
+    }
   }, []);
 
   return (
