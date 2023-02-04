@@ -1,4 +1,7 @@
-import { requestPermission } from "@tauri-apps/api/notification";
+import {
+  isPermissionGranted,
+  requestPermission,
+} from "@tauri-apps/api/notification";
 import { appWindow } from "@tauri-apps/api/window";
 import { cx } from "class-variance-authority";
 import { useAtom } from "jotai";
@@ -6,8 +9,10 @@ import { useEffect } from "react";
 import Clock from "./components/clock";
 import ControlButtons from "./components/control-buttons";
 import Titlebar from "./components/titlebar";
-import { permissionGranted, setPermission } from "./utils/notifications";
+// import { permissionGranted, setPermission } from "./utils/notifications";
 import { breakAtom } from "./utils/store";
+
+let permissionGranted = await isPermissionGranted();
 
 const App = () => {
   const [isBreak] = useAtom(breakAtom);
@@ -18,9 +23,9 @@ const App = () => {
       e.preventDefault();
     });
     if (!permissionGranted) {
-      requestPermission().then((granted) => {
-        setPermission(granted === "granted");
-      });
+      const permission = requestPermission().then(
+        (permission) => (permissionGranted = permission === "granted")
+      );
     }
   }, []);
 
