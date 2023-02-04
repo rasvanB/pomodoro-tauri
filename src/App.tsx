@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import Clock from "./components/clock";
 import ControlButtons from "./components/control-buttons";
 import Titlebar from "./components/titlebar";
-// import { permissionGranted, setPermission } from "./utils/notifications";
 import { breakAtom } from "./utils/store";
 
 let permissionGranted = await isPermissionGranted();
@@ -28,7 +27,7 @@ const App = () => {
       );
     }
   }, []);
-
+  console.log("permissionGranted", permissionGranted);
   return (
     <div
       className={cx(

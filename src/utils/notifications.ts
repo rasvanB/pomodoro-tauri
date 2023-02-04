@@ -1,11 +1,10 @@
 import {
-  requestPermission,
+  isPermissionGranted,
   sendNotification,
 } from "@tauri-apps/api/notification";
-export var permissionGranted = false;
-export const setPermission = (b: boolean) => (permissionGranted = b);
-export const pushNotification = (title: string, body: string) => {
-  if (permissionGranted) {
+
+export const pushNotification = async (title: string, body: string) => {
+  if (await isPermissionGranted()) {
     sendNotification({ title, body });
   }
 };

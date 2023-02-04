@@ -1,6 +1,7 @@
 import { cx } from "class-variance-authority";
 import { useAtom } from "jotai";
 import { useEffect, useMemo } from "react";
+import { pushNotification } from "../utils/notifications";
 import {
   breakAtom,
   incrementRoundAtom,

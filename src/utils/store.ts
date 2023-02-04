@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { Settings } from "../types/settings";
+import { pushNotification } from "./notifications";
 
 const initialSettings: Settings = {
   focusTime: 25,
@@ -51,11 +52,20 @@ export const incrementRoundAtom = atom(null, (get, set) => {
       isShortBreak = true;
       shortBreaks++;
     }
+    pushNotification(
+      "Pomodoro Completed!",
+      "Great job! Take a short break and come back refreshed."
+    );
   } else {
+    pushNotification(
+      "Break Over!",
+      "Time to get back to work. Focus and tackle the next task!"
+    );
     if (currentRound >= get(settingsAtom).rounds) {
       set(timerAtom, initialTimer);
       return;
     }
+
     currentRound++;
   }
 
