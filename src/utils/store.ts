@@ -52,15 +52,9 @@ export const incrementRoundAtom = atom(null, (get, set) => {
       isShortBreak = true;
       shortBreaks++;
     }
-    pushNotification(
-      "Pomodoro Completed!",
-      "Great job! Take a short break and come back refreshed."
-    );
+    pushNotification("round");
   } else {
-    pushNotification(
-      "Break Over!",
-      "Time to get back to work. Focus and tackle the next task!"
-    );
+    pushNotification("break");
     if (currentRound >= get(settingsAtom).rounds) {
       set(timerAtom, initialTimer);
       return;
