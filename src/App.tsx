@@ -11,8 +11,6 @@ import ControlButtons from "./components/control-buttons";
 import Titlebar from "./components/titlebar";
 import { breakAtom } from "./utils/store";
 
-let permissionGranted = await isPermissionGranted();
-
 const App = () => {
   const [isBreak] = useAtom(breakAtom);
   // make window visible on component mount - prevents white flash
@@ -21,13 +19,13 @@ const App = () => {
     window.addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
-    if (!permissionGranted) {
-      const permission = requestPermission().then(
-        (permission) => (permissionGranted = permission === "granted")
-      );
-    }
+    isPermissionGranted().then((permission) => {
+      if (!permission) {
+        requestPermission();
+      }
+    });
   }, []);
-  console.log("permissionGranted", permissionGranted);
+
   return (
     <div
       className={cx(
