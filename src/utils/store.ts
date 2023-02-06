@@ -2,6 +2,7 @@ import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { Settings } from "../types/settings";
 import { pushNotification } from "./notifications";
+import { roundEndSound } from "./sounds";
 
 const initialSettings: Settings = {
   focusTime: 25,
@@ -40,6 +41,8 @@ export const breakAtom = atom((get) => {
   return isShortBreak || isLongBreak;
 });
 export const incrementRoundAtom = atom(null, (get, set) => {
+  roundEndSound.play();
+
   const prev = get(timerAtom);
   let [isShortBreak, isLongBreak] = [false, false];
   let { shortBreaks, currentRound } = prev;
