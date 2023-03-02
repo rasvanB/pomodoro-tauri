@@ -7,7 +7,7 @@
     <link href="output.css" rel="stylesheet" />
   </head>
   <body
-    class="h-screen w-screen bg-neutral-900 bg-hero bg-cover bg-center bg-no-repeat flex flex-col font-inter"
+    class="h-screen w-screen bg-neutral-900 bg-hero bg-cover bg-center bg-no-repeat flex flex-col font-inter overflow-hidden"
   >
     <div class="flex justify-center items-center mt-5">
       <img src="assets/logo.png" class="w-[48px] h-[51px]" />
@@ -60,6 +60,20 @@
         </svg>
         <span class="ml-1.5">Source</span>
       </button>
+    </div>
+    <div class="absolute -bottom-16 flex justify-center items-center w-full">
+      <div class="relative">
+        <img
+          src="assets/timer1.png"
+          alt="timer1"
+          class="w-[350px] h-auto aspect-auto absolute right-28 bottom-6 shadow-[-27px_44px_51px_-12px_#0F0324] -rotate-6 z-10"
+        />
+        <img
+          src="assets/timer2.png"
+          alt="timer1"
+          class="w-[350px] h-auto aspect-auto relative rotate-6 shadow-[-16px_43px_73px_34px_rgba(1,75,22,0.25)] left-28"
+        />
+      </div>
     </div>
   </body>
 </html>
